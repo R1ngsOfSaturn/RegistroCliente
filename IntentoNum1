@@ -1,0 +1,216 @@
+ import os
+
+
+class Cliente:
+
+  def __init__(self, nombre, apellido, direccion, modelo, contacto, fecha,
+               trabajo, repuesto, codigo):
+    self.nombre_cliente = nombre
+    self.apellido_cliente = apellido
+    self.direccion_cliente = direccion
+    self.modelo_unidad = modelo
+    self.contacto = contacto
+    self.fecha = fecha
+    self.trabajo_realizado = trabajo
+    self.repuesto_utilizado = repuesto
+    self.codigo_boleta = codigo
+
+
+
+  def mostrar_informacion(self):
+    os.system('clear')
+    print(
+      f"Nombre completo: {self.nombre_cliente} {self.apellido_cliente}\n\n"
+      "-------------------\n\n"
+      f"Dirección: {self.direccion_cliente}\n\n"
+      "-------------------\n\n"
+      f"Modelo: {self.modelo_unidad}\n\n"
+      "-------------------\n\n"
+      f"Número de contacto: {self.contacto}\n\n"
+      "-------------------\n\n"
+      f"Fecha de realización del trabajo: {self.trabajo_realizado}\n -------------------\n\n"
+      f"Pieza cambiada: {self.repuesto_utilizado}\n\n"
+      "-------------------\n\n")
+    input("pulse enter para continuar: ")
+clientes = []
+
+def crearCliente():
+  nombre = input("Ingrese el nombre del cliente: ").upper()
+  apellido = input("Ingrese el apellido del cliente: ").upper()
+  direccion = input("Ingrese la dirección del cliente: ").upper()
+  modelo = input("Ingrese el modelo de la unidad: ").upper()
+  contacto = int(input("Ingrese el número del cliente: "))
+  fecha = input("Fecha de la reparación: ").upper()
+  trabajo = input("¿Qué trabajo se realizó?: ").upper()
+  repuesto = input("¿Qué repuesto se utilizó?: ").upper()
+  codigo = (input("Ingrese el código de la boleta: "))
+
+  cliente = Cliente(nombre, apellido, direccion, modelo, contacto, fecha,
+                    trabajo, repuesto, codigo)
+  return cliente
+
+
+
+def opcion1():
+   nombre = input("Ingrese el nombre del cliente: ")
+   cliente.nombre_cliente = nombre
+   print(f"datos editados correctamente. Nuevo nombre: {nombre}")
+   input("Pulse enter para continuar")
+
+def opcion2():
+    apellido = input("Ingrese el apellido del cliente: ")
+    cliente.apellido_cliente = apellido
+    print(f"Elemento editado correctamente. Nuevo apellido: {apellido}")
+    input("Pulse enter para continuar")
+
+def opcion3():
+  direccion = input("Ingrese el apellido del cliente: ")
+  cliente.direccion_cliente = direccion
+  print(f"Elemento editado correctamente. Nueva dirección: {direccion}")
+  input("Pulse enter para continuar")
+
+def opcion4():
+  modelo = input("Ingrese el modelo de la unidad: ")
+  cliente.modelo_unidad = modelo
+  print(f"Elemento editado correctamente. Nuevo modelo de la unidad: {modelo}")
+
+def opcion5():
+  contacto = input("Ingrese el número de contacto: ")
+  cliente.contacto = contacto
+  print(f"Elemento editado correctamente. Nuevo número de contacto: {contacto}")
+  input("Pulse enter para continuar")
+
+def opcion6():
+  fecha = input("Ingrese la fecha de reparación: ")
+  cliente.contacto = fecha
+  print(f"Elemento editado correctamente. Nueva fecha actualizada: {fecha}")
+  input("Pulse enter para continuar")
+
+def opcion7():
+  repuesto = input("Ingrese el repuesto utilizado: ")
+  cliente.repuesto_utilizado = repuesto
+  print(f"Elemento editado correctamente. Nuevo número de contacto: {repuesto}")
+  input("Pulse enter para continuar")
+
+  
+
+def opcion8():
+  codigo = input("Ingrese el código de la boleta: ")
+  cliente.codigo_boleta = codigo
+  print(f"Elemento editado correctamente. Nuevo código: {codigo}")
+  input("Pulse enter para continuar")
+
+
+def config():
+  while True:
+    print("indique que opción quiere editar: \n\n" + "1.Nombre del cliente\n" +
+          "2.Apellido del cliente\n" + "3.Dirección del Cliente\n" +
+          "4.Modelo de la unidad\n" + "5.Número de contacto\n" +
+          "6.Fecha del trabajo realizado\n" + "7.Repuesto utilizado\n" +
+          "8.Codigo de la boleta\n")
+
+    editar = int(input("Elija una opción: "))
+  
+    if editar == 1:
+      opcion1()
+      break
+  
+    elif editar == 2:
+      opcion2()
+      break
+      
+    elif editar == 3:
+      opcion3()
+      break
+
+    elif editar == 4:
+      opcion4()
+      break
+
+    elif editar == 5:
+      opcion5()
+      break
+
+    elif editar == 6:
+      opcion6()
+      break
+
+    elif editar == 7: 
+      opcion7()
+      break
+    elif editar == 8:
+      opcion8()
+      break
+    else:
+      print("Ingrese un código correcto")
+      break 
+    
+
+
+
+
+
+while True:
+  os.system('clear')
+
+  print(
+    "1. Agregar cliente\n2. Buscar información\n3. Configuración\n4. Salir")
+
+  opcion = int(input("Elija una opción: "))
+
+  if opcion == 1:
+    clientes.append(crearCliente())
+    os.system('clear')
+    print("Cliente agregado correctamente")
+    input("pulse enter para continuar: ")
+
+  elif opcion == 2:
+    codigo_boleta = input("Ingrese el código de la boleta: ")
+
+    encontrado = False
+
+    for cliente in clientes:
+      if cliente.codigo_boleta == codigo_boleta:
+        cliente.mostrar_informacion()
+        encontrado = True
+        break
+
+    if encontrado == False:
+      print(
+        "El número de boleta no figura en la base de datos. Ingrese el nombre del cliente a continuación: "
+      )
+      nombre_cliente = input("Ingrese el nombre del cliente: ").upper()
+      for cliente in clientes:
+        if cliente.nombre_cliente == nombre_cliente:
+          cliente.mostrar_informacion()
+          encontrado = True
+          break
+
+    if encontrado == False:
+      print(
+        "El cliente no está registrado. ¿Desea registrarlo? Responda Si o No: "
+      )
+      respuesta = input().upper()
+      if respuesta == "SI":
+        clientes.append(crearCliente())
+        os.system('clear')
+        print("Cliente registrado correctamente")
+        input("pulse enter para continuar: ")
+      else:
+        input("pulse enter para continuar: ")
+
+    
+
+  elif opcion == 3:
+    id = input("Ingrese el código de boleta del cliente a editar: ")
+    
+    for cliente in clientes: 
+    
+      if cliente.codigo_boleta == id: 
+         config()
+     
+
+  elif opcion == 4:
+    break
+
+print("¡Hasta pronto!")
